@@ -32,4 +32,6 @@ postgresql_hba_entries:
   - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
   - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
   - { type: host, database: all, user: all, address: '172.17.0.0/24', auth_method: md5 }
-pulp_install_dir: /opt/pulp/lib
+pulp_lib_path: /var/lib/pulp
+pulp_smash_installed: false
+molecule_python_interpreter: /usr/bin/python3

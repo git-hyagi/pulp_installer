@@ -1,2 +1,1 @@
 pulp_configure_firewall: none
-pulp_python_interpreter: '/opt/rh/rh-python38/root/usr/bin/python3.8'

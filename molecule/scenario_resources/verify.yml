@@ -7,15 +7,15 @@
   hosts: all
   become: true
   vars:
-    testinfra_bin: "{{ pulp_install_dir }}/bin/py.test"
+    testinfra_bin: "{{ pulp_lib_path }}/bin/py.test"
     testinfra_test_directory: /tmp/molecule/testinfra
   tasks:
     - name: Install testinfra
       pip:
         name: pytest-testinfra
         state: present
-        virtualenv: '{{ pulp_install_dir }}'
-        virtualenv_command: '{{ pulp_python_interpreter }} -m venv'
+        virtualenv: '{{ pulp_lib_path }}'
+        virtualenv_command: '{{ molecule_python_interpreter }} -m venv'
 
     - name: Install iproute (needed for socket connection tests) on Red Hat based systems
       package:
@@ -46,6 +46,21 @@
       register: copy_testinfra_tests
       with_fileglob:
         - "{{ lookup('env', 'MOLECULE_VERIFIER_TEST_DIRECTORY') }}/testinfra_*.py"
+
+    - block:
+        - name: Create pulp_smash directory to keep settings.json file
+          file:
+            path: "{{ pulp_smash_config_dir }}"
+            mode: '0755'
+            state: directory
+
+        - name: Copy pulp smash settings.json to avoid file not found exception
+          file:
+            src: "{{ pulp_lib_path }}/.config/pulp_smash/settings.json"
+            dest: "{{ pulp_smash_config_dir }}/settings.json"
+            state: link
+      when: pulp_smash_installed
+
 
     - name: Execute testinfra tests
       command: "{{ testinfra_bin }} {{ item.dest }}"

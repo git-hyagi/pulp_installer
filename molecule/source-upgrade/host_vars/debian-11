@@ -7,4 +7,3 @@ pulp_install_plugins:
   # pulp-rpm:
   #   upgrade: true
   #   source_dir: "/var/lib/pulp/devel/pulp_rpm"
-pulp_python_interpreter: /usr/bin/python3

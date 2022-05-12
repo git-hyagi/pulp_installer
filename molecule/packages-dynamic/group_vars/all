@@ -13,4 +13,6 @@ pulp_settings:
 # doesn't:
 pulp_pkg_upgrade_all: true
 pulp_webserver_server: apache
-pulp_install_dir: /opt/pulp/lib
+pulp_lib_path: /var/lib/pulp
+pulp_smash_installed: false
+molecule_python_interpreter: /usr/bin/python3

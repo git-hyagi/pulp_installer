@@ -37,11 +37,13 @@ pulp_install_plugins:
 pulp_media_root: /opt/pulp/media
 pulp_cache_dir: /opt/pulp/cache
 pulp_user_home: /opt/pulp/home
-pulp_install_dir: /opt/pulp/lib
 pulp_config_dir: /opt/pulp/etc
 developer_user_home: /opt/pulp/devel
 developer_user: pulp
 pulp_settings:
   secret_key: secret
   content_origin: "https://{{ ansible_fqdn }}"
-pulp_install_dir: /opt/pulp/lib
+pulp_lib_path: /opt/pulp/devel
+pulp_smash_installed: true
+pulp_smash_config_dir: /root/.config/pulp_smash
+molecule_python_interpreter: /usr/bin/python3
